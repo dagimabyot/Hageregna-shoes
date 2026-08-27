@@ -22,6 +22,17 @@ export const AuthProvider = ({ children }) => {
     try {
       setIsLoadingPublicSettings(true);
       setAuthError(null);
+
+      // A frontend-only checkout can be previewed without Base44 runtime values.
+      // Keep public routes usable, while protected actions still require the backend.
+      if (!appParams.appId) {
+        setAppPublicSettings(null);
+        setIsAuthenticated(false);
+        setAuthChecked(true);
+        setIsLoadingAuth(false);
+        setIsLoadingPublicSettings(false);
+        return;
+      }
       
       // First, check app public settings (with token if available)
       // This will tell us if auth is required, user not registered, etc.
