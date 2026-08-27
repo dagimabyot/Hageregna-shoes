@@ -1,6 +1,6 @@
 import React from "react";
 import { Clock, Check, Truck, Package, CheckCircle2, X, CreditCard, Box, Send } from "lucide-react";
-import { ORDER_STEPS, TERMINAL_STATUSES } from "@/lib/orderStatuses";
+import { ORDER_STEPS } from "@/lib/orderStatuses";
 
 const STEP_ICONS = {
   "Order Placed": Clock,
