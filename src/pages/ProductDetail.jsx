@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { Heart, ShoppingBag, Star, Truck, Shield, ChevronLeft, ChevronRight, Minus, Plus, Check } from "lucide-react";
+import { Heart, ShoppingBag, Star, Truck, Shield, ChevronRight, Minus, Plus, Check } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useToast } from "@/components/ui/use-toast";
 import ProductCard from "@/components/products/ProductCard";

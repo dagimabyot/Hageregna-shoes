@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
-import { ArrowLeft, MapPin, CreditCard, Phone, Clock, Package, Receipt } from "lucide-react";
+import { MapPin, CreditCard, Phone, Clock, Package, Receipt } from "lucide-react";
 import OrderTimeline from "@/components/shared/OrderTimeline";
 import { STATUS_COLORS } from "@/lib/orderStatuses";
 import PageHeader from "@/components/shared/PageHeader";

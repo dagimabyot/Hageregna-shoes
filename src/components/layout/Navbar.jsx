@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, ShoppingBag, Heart, User, Menu, X, Package, UserPlus, LogOut, ChevronRight } from "lucide-react";
+import { Search, ShoppingBag, Heart, User, Menu, X, Package, LogOut, ChevronRight } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useAuth } from "@/lib/AuthContext";
 import RegisterDropdown from "@/components/auth/RegisterDropdown";

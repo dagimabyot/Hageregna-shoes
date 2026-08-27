@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { useToast } from "@/components/ui/use-toast";
-import { Shield, Truck, Check, ShoppingBag, MapPin, Ticket, X, Tag } from "lucide-react";
+import { Shield, Truck, Check, Ticket, X, Tag } from "lucide-react";
 import PaymentMethodSelector from "@/components/checkout/PaymentMethodSelector";
 import { generateOrderConfirmationEmail, sendEmailWithLog } from "@/lib/emailTemplates";
 import PageHeader from "@/components/shared/PageHeader";

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { CreditCard, Search, Download } from "lucide-react";
-import { STATUS_COLORS as ORDER_STATUS_COLORS } from "@/lib/orderStatuses";
+import { CreditCard, Search } from "lucide-react";
 
 const PAYMENT_STATUS_COLORS = {
   "Pending": "bg-yellow-100 text-yellow-800",

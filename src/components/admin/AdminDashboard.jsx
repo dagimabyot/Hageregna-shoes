@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { ShoppingBag, Package, Users, Clock, AlertTriangle, XCircle, Bell, DollarSign, Calendar, TrendingUp } from "lucide-react";
+import { ShoppingBag, Package, Users, Clock, AlertTriangle, XCircle, Bell, Calendar, TrendingUp } from "lucide-react";
 import { ORDER_STATUSES, STATUS_COLORS } from "@/lib/orderStatuses";
-import { Link } from "react-router-dom";
 
 function StatCard({ icon: Icon, label, value, accent }) {
   return (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { useToast } from "@/components/ui/use-toast";
-import { Plus, Pencil, Trash2, MapPin, Clock, X, Truck } from "lucide-react";
+import { Plus, Pencil, Trash2, MapPin, Clock, X } from "lucide-react";
 
 const EMPTY = { zone_name: "", delivery_fee: 0, estimated_time: "", is_active: true };
 

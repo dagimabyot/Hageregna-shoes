@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { base44 } from "@/api/base44Client";
+import React, { useEffect, useState } from "react";
+import { KeyRound, Save } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { Store, Save, Upload, Phone, Mail, MapPin, Facebook, Instagram, Send, Music, Youtube, KeyRound, Eye, EyeOff } from "lucide-react";
-import { setAdminPasscode, hasAdminPasscode } from "@/lib/adminPasscode";
+import { hasAdminPasscode, setAdminPasscode } from "@/lib/adminPasscode";
 
-function AdminPasscodeSection() {
+export default function AdminSettings() {
   const { toast } = useToast();
   const [newPasscode, setNewPasscode] = useState("");
   const [confirmPasscode, setConfirmPasscode] = useState("");
-  const [savingPasscode, setSavingPasscode] = useState(false);
   const [hasPasscode, setHasPasscode] = useState(false);
-  const [showPasscode, setShowPasscode] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     hasAdminPasscode().then(setHasPasscode);
   }, []);
 
-  const handleUpdatePasscode = async (e) => {
-    e.preventDefault();
-    if (!newPasscode || newPasscode.length < 6) {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (newPasscode.length < 6) {
       toast({ title: "Passcode must be at least 6 characters", variant: "destructive" });
       return;
     }
@@ -26,27 +24,41 @@ function AdminPasscodeSection() {
       toast({ title: "Passcodes do not match", variant: "destructive" });
       return;
     }
-    setSavingPasscode(true);
+    setSaving(true);
     try {
       await setAdminPasscode(newPasscode);
-      toast({ title: "Admin passcode updated successfully" });
       setNewPasscode("");
       setConfirmPasscode("");
-      hasAdminPasscode().then(setHasPasscode);
+      setHasPasscode(true);
+      toast({ title: "Admin passcode updated successfully" });
     } catch {
       toast({ title: "Failed to update passcode", variant: "destructive" });
     } finally {
-      setSavingPasscode(false);
+      setSaving(false);
     }
-  };
-
-  const inputClass = "w-full border border-border rounded-lg px-3 py-2.5 text-sm outline-none focus:border-primary transition-colors";
-  const labelClass = "text-[11px] tracking-[0.2em] uppercase text-muted-foreground font-mono block mb-1.5";
+  }
 
   return (
-    <div className="rounded-xl border border-border/60 bg-card p-6 shadow-soft">
-      <h3 className="text-sm font-semibold tracking-widest uppercase mb-4 flex items-center gap-2">
-        <KeyRound size={16} className="text-primary" /> Admin Passcode
-      </h3>
-      <div className="flex items-center gap-2 mb-4 p-3 rounded-lg bg-muted/30">
-        <span className={`w-2 h-2 ro
+    <section className="max-w-3xl rounded-xl border border-border/60 bg-card p-6 shadow-soft">
+      <h2 className="mb-2 flex items-center gap-2 text-lg font-semibold">
+        <KeyRound size={18} className="text-primary" /> Admin settings
+      </h2>
+      <p className="mb-6 text-sm text-muted-foreground">
+        {hasPasscode ? "Update the passcode used to protect the admin area." : "Create a passcode to protect the admin area."}
+      </p>
+      <form onSubmit={handleSubmit} className="grid gap-4 sm:max-w-md">
+        <label className="grid gap-2 text-sm font-medium">
+          New passcode
+          <input className="rounded-lg border border-border bg-background px-3 py-2 outline-none focus:border-primary" type="password" value={newPasscode} onChange={(event) => setNewPasscode(event.target.value)} minLength={6} required />
+        </label>
+        <label className="grid gap-2 text-sm font-medium">
+          Confirm passcode
+          <input className="rounded-lg border border-border bg-background px-3 py-2 outline-none focus:border-primary" type="password" value={confirmPasscode} onChange={(event) => setConfirmPasscode(event.target.value)} minLength={6} required />
+        </label>
+        <button type="submit" disabled={saving} className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground disabled:opacity-60">
+          <Save size={16} /> {saving ? "Saving..." : "Save passcode"}
+        </button>
+      </form>
+    </section>
+  );
+}

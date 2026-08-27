@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { useToast } from "@/components/ui/use-toast";
-import { Plus, Pencil, Trash2, Ticket, X, Calendar, Percent, DollarSign, Truck } from "lucide-react";
+import { Plus, Pencil, Trash2, Ticket, X, Percent, DollarSign, Truck } from "lucide-react";
 
 const DISCOUNT_TYPES = [
   { value: "percentage", label: "Percentage", icon: Percent },
