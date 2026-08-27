@@ -1,0 +1,42 @@
+{
+  "name": "Payment",
+  "type": "object",
+  "properties": {
+    "order_id": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "Cash on Delivery",
+        "Telebirr",
+        "CBE Birr"
+      ],
+      "default": "Cash on Delivery"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Paid",
+        "Failed",
+        "Refunded"
+      ],
+      "default": "Pending"
+    },
+    "transaction_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "order_id",
+    "amount",
+    "payment_method"
+  ]
+}

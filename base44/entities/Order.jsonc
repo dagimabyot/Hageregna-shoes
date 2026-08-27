@@ -1,0 +1,98 @@
+{
+  "name": "Order",
+  "type": "object",
+  "properties": {
+    "customer_name": {
+      "type": "string"
+    },
+    "customer_email": {
+      "type": "string"
+    },
+    "customer_phone": {
+      "type": "string"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "subtotal": {
+      "type": "number",
+      "default": 0
+    },
+    "total_amount": {
+      "type": "number"
+    },
+    "delivery_fee": {
+      "type": "number",
+      "default": 0
+    },
+    "coupon_code": {
+      "type": "string"
+    },
+    "coupon_discount": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Order Placed",
+        "Payment Confirmed",
+        "Processing",
+        "Packed",
+        "Shipped",
+        "Out for Delivery",
+        "Delivered",
+        "Cancelled",
+        "Returned"
+      ],
+      "default": "Order Placed"
+    },
+    "status_history": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "Cash on Delivery",
+        "Telebirr",
+        "CBE Birr"
+      ],
+      "default": "Cash on Delivery"
+    },
+    "transaction_reference": {
+      "type": "string"
+    },
+    "delivery_zone": {
+      "type": "string"
+    },
+    "delivery_address": {
+      "type": "string"
+    },
+    "estimated_delivery_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "approved_by": {
+      "type": "string"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "tracking_note": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "customer_name",
+    "customer_phone",
+    "items",
+    "total_amount"
+  ]
+}

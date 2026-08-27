@@ -1,0 +1,41 @@
+{
+  "name": "EmailLog",
+  "type": "object",
+  "properties": {
+    "recipient": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string"
+    },
+    "email_type": {
+      "type": "string",
+      "enum": [
+        "order_confirmation",
+        "order_update",
+        "admin_notification",
+        "newsletter",
+        "other"
+      ],
+      "default": "other"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "sent",
+        "failed"
+      ],
+      "default": "sent"
+    },
+    "error_message": {
+      "type": "string"
+    },
+    "order_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "recipient",
+    "subject"
+  ]
+}

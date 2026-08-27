@@ -1,0 +1,66 @@
+{
+  "name": "StoreSettings",
+  "type": "object",
+  "properties": {
+    "store_name": {
+      "type": "string",
+      "default": "Hageregna Shoes"
+    },
+    "logo_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "email": {
+      "type": "string",
+      "default": "info@hageregna.com"
+    },
+    "phone": {
+      "type": "string",
+      "default": "+251 911 000 000"
+    },
+    "address": {
+      "type": "string"
+    },
+    "social_facebook": {
+      "type": "string"
+    },
+    "social_instagram": {
+      "type": "string"
+    },
+    "social_telegram": {
+      "type": "string"
+    },
+    "social_tiktok": {
+      "type": "string"
+    },
+    "social_youtube": {
+      "type": "string"
+    },
+    "default_delivery_fee": {
+      "type": "number",
+      "default": 100
+    },
+    "default_delivery_time": {
+      "type": "string",
+      "default": "1-2 business days"
+    },
+    "enable_cod": {
+      "type": "boolean",
+      "default": true
+    },
+    "enable_telebirr": {
+      "type": "boolean",
+      "default": true
+    },
+    "enable_cbe_birr": {
+      "type": "boolean",
+      "default": true
+    },
+    "admin_passcode_hash": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "store_name"
+  ]
+}

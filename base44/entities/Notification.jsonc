@@ -1,0 +1,33 @@
+{
+  "name": "Notification",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "order",
+        "payment",
+        "account",
+        "delivery"
+      ],
+      "default": "order"
+    },
+    "is_read": {
+      "type": "boolean",
+      "default": false
+    },
+    "order_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "message"
+  ]
+}
