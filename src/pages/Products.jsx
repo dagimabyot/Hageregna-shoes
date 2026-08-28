@@ -82,7 +82,7 @@ export default function Products() {
       .catch((error) => {
         console.error("[v0] Product catalog request failed:", error);
         setAllProducts([]);
-        setLoadError("We couldn't load the shoes right now. Please try again.");
+        setLoadError(error?.message || "The product service is not configured for this preview.");
       })
       .finally(() => setLoading(false));
   }, [category, sortBy, filterFlag, retryCount]);
