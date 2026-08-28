@@ -38,6 +38,8 @@ export default function Products() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
+  const [retryCount, setRetryCount] = useState(0);
   const [filters, setFilters] = useState(defaultFilters);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -62,6 +64,7 @@ export default function Products() {
   // Fetch from server when URL-driven params change.
   useEffect(() => {
     setLoading(true);
+    setLoadError(null);
     const query = {};
     if (category) query.category = category;
     if (filterFlag && LABEL_MAP[filterFlag]) query[LABEL_MAP[filterFlag]] = true;
@@ -75,10 +78,14 @@ export default function Products() {
     };
 
     base44.entities.Product.filter(query, sortMap[sortBy] || "-created_date", 200)
-      .then((items) => setAllProducts(items))
-      .catch(() => setAllProducts([]))
+      .then((items) => setAllProducts((items || []).filter((item) => item.is_active !== false)))
+      .catch((error) => {
+        console.error("[v0] Product catalog request failed:", error);
+        setAllProducts([]);
+        setLoadError("We couldn't load the shoes right now. Please try again.");
+      })
       .finally(() => setLoading(false));
-  }, [category, sortBy, filterFlag]);
+  }, [category, sortBy, filterFlag, retryCount]);
 
   const brands = useMemo(() => {
     const set = new Set();
@@ -273,6 +280,12 @@ export default function Products() {
                   <div className="h-3 bg-[#0F0F0F]/5 rounded mt-2 w-1/3" />
                 </div>
               ))}
+            </div>
+          ) : loadError ? (
+            <div className="text-center py-20">
+              <p className="text-[#4A4A4A] text-lg mb-2">Unable to load products</p>
+              <p className="text-sm text-[#4A4A4A]/60">{loadError}</p>
+              <button onClick={() => setRetryCount((count) => count + 1)} className="mt-4 text-sm text-[#B34B2D] hover:underline">Try again</button>
             </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-20">

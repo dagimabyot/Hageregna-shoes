@@ -10,9 +10,9 @@ export default function FeaturedProducts({ title = "Featured", subtitle = "Curat
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    base44.entities.Product.filter({ [filterKey]: true, is_active: true }, '-created_date', 8)
-      .then(setProducts)
-      .catch(() => {})
+    base44.entities.Product.filter({ [filterKey]: true }, '-created_date', 24)
+      .then((items) => setProducts((items || []).filter((item) => item.is_active !== false).slice(0, 8)))
+      .catch((error) => console.error("[v0] Featured products request failed:", error))
       .finally(() => setLoading(false));
   }, [filterKey]);
 
