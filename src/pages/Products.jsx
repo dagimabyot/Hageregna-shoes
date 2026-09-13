@@ -60,26 +60,25 @@ export default function Products() {
   }, [filters]);
 
   // Fetch from server when URL-driven params change.
+    // Fetch products from Base44 when URL-driven params change.
   useEffect(() => {
     setLoading(true);
-    const query = {};
-    if (category) query.category = category;
-    if (filterFlag && LABEL_MAP[filterFlag]) query[LABEL_MAP[filterFlag]] = true;
 
-    const sortMap = {
-      newest: "-created_date",
-      price_asc: "price",
-      price_desc: "-price",
-      rating: "-rating",
-      best_selling: "-sold_quantity",
-    };
-
-    base44.entities.Product.filter(query, sortMap[sortBy] || "-created_date", 200)
-      .then((items) => setAllProducts(items))
-      .catch(() => setAllProducts([]))
-      .finally(() => setLoading(false));
-  }, [category, sortBy, filterFlag]);
-
+    base44.entities.Product
+      .list("-created_date", 200)
+      .then((items) => {
+        console.log("PRODUCTS FROM BASE44:", items);
+        console.log("PRODUCT COUNT:", items?.length);
+        setAllProducts(items || []);
+      })
+      .catch((error) => {
+        console.error("PRODUCT LIST ERROR:", error);
+        setAllProducts([]);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [category, filterFlag, sortBy]);
   const brands = useMemo(() => {
     const set = new Set();
     allProducts.forEach((p) => p.brand && set.add(p.brand));
