@@ -66,10 +66,15 @@ export default function Products() {
 
     base44.entities.Product
       .list("-created_date", 200)
-      .then((items) => {
-        console.log("PRODUCTS FROM BASE44:", items);
-        console.log("PRODUCT COUNT:", items?.length);
-        setAllProducts(items || []);
+      .then((response) => {
+        const items = Array.isArray(response)
+          ? response
+          : Array.isArray(response?.data)
+            ? response.data
+            : Array.isArray(response?.items)
+              ? response.items
+              : [];
+        setAllProducts(items);
       })
       .catch((error) => {
         console.error("PRODUCT LIST ERROR:", error);
